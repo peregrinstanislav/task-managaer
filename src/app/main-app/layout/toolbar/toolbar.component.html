@@ -7,23 +7,13 @@
   <h3>{{'appName' | translate}}</h3>
   <!-- right side lang change -->
   <button
+    [disableRipple]="true"
     [matMenuTriggerFor]="flags"
     mat-icon-button
-    class="m-r-10"
-    id="open-languages-button"
-    style="height: 50px;"
+    class="mr-10"
   >
-    <mat-icon fxHide.lt-sm>language</mat-icon>
-    <span
-      fxHide.lt-sm
-      class="m-t-5"
-    >
-      &nbsp;{{selectedLanguageCode?.toUpperCase()}}
-    </span>
-    <span
-      fxHide.gt-xs
-      style="font-weight: 500;"
-    >
+    <mat-icon>language</mat-icon>
+    <span>
       &nbsp;{{selectedLanguageCode?.toUpperCase()}}
     </span>
   </button>
@@ -32,7 +22,6 @@
       mat-menu-item
       *ngFor="let lang of languages"
       (click)="changeLanguage(lang)"
-      id="{{'language-'+ lang.language}}"
     >
       <span>{{lang.language}}</span>
     </button>

@@ -1,8 +1,8 @@
 {
-    "env": {
-        "production": true,
-        "name": "PROD"
-    },
-    "defaultLanguage": "##defaultLanguage##",
-    "apiUrl": "##apiUrl##"
+  "env": {
+    "production": true,
+    "name": "PROD"
+  },
+  "defaultLanguage": "sk",
+  "apiUrl": "https://6528f94755b137ddc83dfb19.mockapi.io/"
 }

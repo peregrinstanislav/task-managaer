@@ -1,46 +1,48 @@
 {
-    "appName": "Task manager",
-    "buttons": {
-        "saveButton": "Uložiť",
-        "cancelButton": "Zrušiť",
-        "chooseButton": "Vybrať",
-        "yesButton": "Áno",
-        "noButton": "Nie"
+  "appName": "Task manager",
+  "buttons": {
+    "saveButton": "Uložiť",
+    "cancelButton": "Zrušiť",
+    "chooseButton": "Vybrať",
+    "yesButton": "Áno",
+    "noButton": "Nie"
+  },
+  "devextreme": {
+    "sortAscending": "Zoradiť vzostupne",
+    "sortDescending": "Zoradiť zostupne",
+    "sortClear": "Zrušiť zoradenie",
+    "deleteMessage": "Naozaj chcete vymazať túto úlohu?",
+    "emptyMessage": "Žiadne dáta na zobrazenie",
+    "search": "Hľadať..."
+  },
+  "taskManagement": {
+    "dataGrid": {
+      "name": "Názov",
+      "type": "Typ",
+      "deleteTitle": "Vymazať úlohu",
+      "deleteMessage": "Naozaj chcete vymazať túto úlohu?"
     },
-    "devextreme": {
-        "sortAscending": "Zoradiť vzostupne",
-        "sortDescending": "Zoradiť zostupne",
-        "sortClear": "Zrušiť zoradenie",
-        "deleteMessage": "Naozaj chcete vymazať túto úlohu?",
-        "emptyMessage": "Žiadne dáta na zobrazenie",
-        "search": "Hľadať..."
+    "taskTypes": {
+      "wash-dishes": "Umývanie riadu",
+      "vacuum-clean": "Vysávanie"
     },
-    "taskManagement": {
-        "dataGrid": {
-            "name": "Názov",
-            "type": "Typ",
-            "deleteTitle": "Vymazať úlohu",
-            "deleteMessage": "Naozaj chcete vymazať túto úlohu?"
-        },
-        "taskTypes": {
-            "wash-dishes": "Umývanie riadu",
-            "vacuum-clean": "Vysávanie"
-        },
-        "taskChooser": {
-            "title": "Vyberte typ úlohy",
-            "placeholder": "Typ úlohy"
-        },
-        "taskDetail": {
-            "editTitle": "Zmena úlohy",
-            "newTitle": "Nová úloha",
-            "formFields": {
-                "name": "Názov",
-                "who" : "Kto",
-                "room" : "Izba",
-                "durationInHours" : "Ako dlho"
-            }
-        }
+    "taskChooser": {
+      "title": "Vyberte typ novej úlohy",
+      "placeholder": "Typ úlohy"
     },
-    "unexpectedError": "Operácia sa nepodarila",
-    "requestSucesfull": "Operácia úspešná"
+    "taskDetail": {
+      "editTitle": "Editácia úlohy",
+      "newTitle": "Nová úloha",
+      "formFields": {
+        "name": "Názov",
+        "who": "Kto",
+        "room": "Izba",
+        "durationInHours": "Ako dlho"
+      }
+    }
+  },
+  "unexpectedError": "Operácia sa nepodarila",
+  "requestSucesfull": "Operácia úspešná",
+  "required": "Hodnota je povinná",
+  "minValue": "Hodnota je menšia ako 0"
 }

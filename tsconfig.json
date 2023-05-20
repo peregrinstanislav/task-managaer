@@ -13,7 +13,6 @@
     "sourceMap": true,
     "declaration": false,
     "downlevelIteration": true,
-    "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
     "moduleResolution": "node",

@@ -1,61 +1,42 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { AppConfigService } from '../../../common-services/app-config.service';
-import { AppConfig } from 'src/app/common-models/config.model';
-import { Task } from '../models/task-management.model';
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { Observable } from "rxjs";
+import { AppConfigService } from "../../../shared/services/app-config.service";
+import { Task } from "../models/task-management.model";
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class TasksService {
+  constructor(
+    private httpClient: HttpClient,
+    private appConfig: AppConfigService
+  ) {}
 
-    private config: AppConfig;
+  public getTasks(): Observable<Task[]> {
+    return this.httpClient.get<Task[]>(
+      this.appConfig.settings.apiUrl + "tasks"
+    );
+  }
 
-    constructor(
-        private httpClient: HttpClient
-    ) {
-        this.config = AppConfigService.settings;
-    }
+  public getTaskDetail(taskId: string): Observable<any> {
+    return this.httpClient.get(
+      this.appConfig.settings.apiUrl + "tasks/" + taskId
+    );
+  }
 
-    /**
-     * Get tasks from api
-     */
-    public getTasks(): Observable<any> {
-        return this.httpClient.get(this.config.apiUrl + 'tasks');
-    }
+  public insertTask(task: Task): Observable<any> {
+    return this.httpClient.post(this.appConfig.settings.apiUrl + "tasks", task);
+  }
 
-    /**
-     * Get task detail
-     */
-    public getTaskDetail(taskId: string): Observable<any> {
-        return this.httpClient.get(this.config.apiUrl + 'tasks/' + taskId);
-    }
+  public updateTask(task: Task): Observable<any> {
+    return this.httpClient.put(
+      this.appConfig.settings.apiUrl + "tasks/" + task.id,
+      task
+    );
+  }
 
-    /**
-     * Insert task to backend
-     */
-    public insertTask(task: Task): Observable<any> {
-        return this.httpClient.post(this.config.apiUrl + 'tasks', task);
-    }
-
-    /**
-     * Update task on backend
-     */
-    public updateTask(task: Task): Observable<any> {
-        return this.httpClient.put(this.config.apiUrl + 'tasks/' + task._id, task);
-    }
-
-    /**
-     * Delete task from backend
-     */
-    public deleteTask(taskId: string): Observable<any> {
-        return this.httpClient.delete(this.config.apiUrl + 'tasks/' + taskId);
-    }
-
-    private getHeaders(): any {
-        return {
-            headers: new HttpHeaders({
-                'Content-Type': 'application/json; charset=utf-8'
-            })
-        };
-    }
+  public deleteTask(taskId: string): Observable<any> {
+    return this.httpClient.delete(
+      this.appConfig.settings.apiUrl + "tasks/" + taskId
+    );
+  }
 }

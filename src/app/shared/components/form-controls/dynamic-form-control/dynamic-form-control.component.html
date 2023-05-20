@@ -1,0 +1,24 @@
+<div [ngSwitch]="control.type">
+  <app-input-form-control
+    *ngSwitchCase="'text'"
+    [form]="form"
+    [control]="control"
+  ></app-input-form-control>
+  <app-input-form-control
+    *ngSwitchCase="'number'"
+    [form]="form"
+    [control]="control"
+  ></app-input-form-control>
+  <!-- datepicker not implemented yet, added empty component just for the sake of demonstration how form works -->
+  <app-date-picker-form-control
+    *ngSwitchCase="'datePicker'"
+    [form]="form"
+    [control]="control"
+  ></app-date-picker-form-control>
+  <!-- if there will be new input types, then new switch cases will be added -->
+  <app-input-form-control
+    *ngSwitchDefault
+    [form]="form"
+    [control]="control"
+  ></app-input-form-control>
+</div>

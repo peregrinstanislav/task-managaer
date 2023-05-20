@@ -1,46 +1,48 @@
 {
-    "appName" : "Task manager",
-    "buttons" : {
-        "saveButton": "Save",
-        "cancelButton": "Cancel",
-        "chooseButton": "Select type",
-        "yesButton": "Yes",
-        "noButton": "No"
+  "appName": "Task manager",
+  "buttons": {
+    "saveButton": "Save",
+    "cancelButton": "Cancel",
+    "chooseButton": "Select type",
+    "yesButton": "Yes",
+    "noButton": "No"
+  },
+  "devextreme": {
+    "sortAscending": "Sort ascending",
+    "sortDescending": "Sort descending",
+    "sortClear": "Clear sorting",
+    "deleteMessage": "Are you sure you want to delete this task?",
+    "emptyMessage": "No data",
+    "search": "Search..."
+  },
+  "taskManagement": {
+    "dataGrid": {
+      "name": "Name",
+      "type": "Type",
+      "deleteTitle": "Delete task",
+      "deleteMessage": "Are you sure you want to delete this task?"
     },
-    "devextreme": {
-        "sortAscending": "Sort ascending",
-        "sortDescending": "Sort descending",
-        "sortClear": "Clear sorting",
-        "deleteMessage": "Are you sure you want to delete this task?",
-        "emptyMessage": "No data",
-        "search": "Search..."
+    "taskTypes": {
+      "wash-dishes": "Wash dishes",
+      "vacuum-clean": "Vaccum clean"
     },
-    "taskManagement" : {
-        "dataGrid" : {
-            "name": "Name",
-            "type": "Type",
-            "deleteTitle": "Delete task",
-            "deleteMessage": "Are you sure you want to delete this task?"
-        },
-        "taskTypes" : {
-            "wash-dishes": "Wash dishes",
-            "vacuum-clean": "Vaccum clean"
-        },
-        "taskChooser" : {
-            "title" : "Select task type",
-            "placeholder" : "Task type"
-        },
-        "taskDetail": {
-            "editTitle": "Edit task",
-            "newTitle": "New task",
-            "formFields": {
-                "name": "Name",
-                "who" : "Who",
-                "room" : "Room",
-                "durationInHours" : "Duration in hourds"
-            }
-        }
+    "taskChooser": {
+      "title": "Select type of new task",
+      "placeholder": "Task type"
     },
-    "unexpectedError": "Request unsucesfull",
-    "requestSucesfull": "Request sucesfull"
+    "taskDetail": {
+      "editTitle": "Edit task",
+      "newTitle": "New task",
+      "formFields": {
+        "name": "Name",
+        "who": "Who",
+        "room": "Room",
+        "durationInHours": "Duration in hourds"
+      }
+    }
+  },
+  "unexpectedError": "Request unsucesfull",
+  "requestSucesfull": "Request sucesfull",
+  "required": "Value is required",
+  "minValue": "Value cannot be less than 0"
 }

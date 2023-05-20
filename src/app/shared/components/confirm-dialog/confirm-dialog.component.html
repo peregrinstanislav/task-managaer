@@ -1,0 +1,16 @@
+<div
+  fxLayout="row"
+  fxLayoutAlign="start center"
+>
+  <h2>
+    <strong>{{dialogData.title}}</strong>
+  </h2>
+</div>
+<div class="mb-15">
+  <p [innerHTML]="dialogData.message"></p>
+</div>
+<app-dialog-buttons
+  [btnYesTitle]="dialogData.btnYesTitle"
+  [btnNoTitle]="dialogData.btnNoTitle"
+  (btnClick$)="closeDialog($event)"
+></app-dialog-buttons>

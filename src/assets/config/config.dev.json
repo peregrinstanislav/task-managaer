@@ -1,8 +1,8 @@
 {
-    "env": {
-        "production": false,
-        "name": "dev"
-    },
-    "defaultLanguage": "sk",
-    "apiUrl": "http://64.225.105.163:3000/"
+  "env": {
+    "production": false,
+    "name": "dev"
+  },
+  "defaultLanguage": "sk",
+  "apiUrl": "https://6528f94755b137ddc83dfb19.mockapi.io/"
 }

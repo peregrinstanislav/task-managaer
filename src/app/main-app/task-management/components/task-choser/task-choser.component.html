@@ -1,0 +1,41 @@
+<div
+  fxLayout="row"
+  fxLayoutAlign="start center"
+>
+  <h2 class="mb-15">
+    <strong>
+      {{'taskManagement.taskChooser.title' | translate}}
+    </strong>
+  </h2>
+</div>
+<form [formGroup]="form">
+  <div
+    fxLayout="row"
+    class="mb-10"
+  >
+    <mat-form-field
+      fxFlex="100"
+      appearance="fill"
+    >
+      <mat-label>
+        {{'taskManagement.taskChooser.placeholder' | translate}}
+      </mat-label>
+      <mat-select formControlName="taskType">
+        <mat-option
+          *ngFor="let type of taskTypes"
+          [value]="type"
+        >
+          {{'taskManagement.taskTypes.' + type | translate}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.controls['taskType'].hasError('required')">{{'required' | translate}}</mat-error>
+    </mat-form-field>
+  </div>
+  <app-dialog-buttons
+    [btnNoTitle]="'buttons.cancelButton' | translate"
+    [btnYesTitle]="'buttons.chooseButton' | translate"
+    [btnYesDisabled]="!form.valid"
+    (btnClick$)="onBtnClick($event)"
+  >
+  </app-dialog-buttons>
+</form>

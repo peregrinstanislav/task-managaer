@@ -1,56 +1,55 @@
 {
-    "forms": [
+  "forms": [
+    {
+      "key": "wash-dishes",
+      "formControls": [
         {
-            "key": "vacuum-clean",
-            "values": [
-                "name",
-                "who",
-                "room"
-            ]
+          "name": "name",
+          "type": "text",
+          "objectPath": "name",
+          "validators": {
+            "required": true
+          }
         },
         {
-            "key": "wash-dishes",
-            "values": [
-                "name",
-                "durationInHours"
-            ]
+          "name": "durationInHours",
+          "type": "number",
+          "objectPath": "fields.durationInHours",
+          "validators": {
+            "required": true,
+            "min": 0
+          }
         }
-    ],
-    "formControls": [
+      ]
+    },
+    {
+      "key": "vacuum-clean",
+      "formControls": [
         {
-            "name": "type",
-            "type": "selectbox",
-            "validators": {
-                "required": true
-            }
+          "name": "name",
+          "type": "text",
+          "objectPath": "name",
+          "validators": {
+            "required": true
+          }
         },
         {
-            "name": "name",
-            "type": "text",
-            "validators": {
-                "required": true
-            }
+          "name": "who",
+          "type": "text",
+          "objectPath": "fields.who",
+          "validators": {
+            "required": true
+          }
         },
         {
-            "name": "durationInHours",
-            "type": "number",
-            "validators": {
-                "required": true
-            }
-        },
-        {
-            "name": "who",
-            "type": "text",
-            "validators": {
-                "required": true
-            }
-        },
-        {
-            "name": "room",
-            "type": "text",
-            "validators": {
-                "required": true
-            }
+          "name": "room",
+          "type": "text",
+          "objectPath": "fields.room",
+          "validators": {
+            "required": true
+          }
         }
-    ]
+      ]
+    }
+  ]
 }

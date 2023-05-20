@@ -1,0 +1,32 @@
+<div
+  fxLayout="column"
+  fxLayoutAlign="center start"
+>
+  <h2 class="ma-0">
+    <strong>
+      {{(isEditForm ? 'taskManagement.taskDetail.editTitle' : 'taskManagement.taskDetail.newTitle') | translate}}
+    </strong>
+  </h2>
+  <h4 class="mb-15">
+    {{ 'taskManagement.taskTypes.' + selectedType | translate}}
+  </h4>
+</div>
+<mat-divider></mat-divider>
+<form
+  [formGroup]="formGroup"
+  class="mt-20"
+>
+  <div *ngFor="let control of jsonFormControls">
+    <app-dynamic-form-control
+      [form]="formGroup"
+      [control]="control"
+    ></app-dynamic-form-control>
+  </div>
+  <app-dialog-buttons
+    [btnNoTitle]="'buttons.cancelButton' | translate"
+    [btnYesTitle]="'buttons.saveButton' | translate"
+    [btnYesDisabled]="!formGroup.valid"
+    (btnClick$)="onBtnClick($event)"
+  >
+  </app-dialog-buttons>
+</form>
