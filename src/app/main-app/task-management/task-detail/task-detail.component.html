@@ -1,0 +1,53 @@
+<div
+  fxLayout="row"
+  fxLayoutAlign="start center"
+>
+  <h2>
+    <strong>
+      {{(isEditForm ? 'taskManagement.taskDetail.editTitle' : 'taskManagement.taskDetail.newTitle') | translate}}
+    </strong>
+  </h2>
+</div>
+<form
+  [formGroup]="formGroup"
+  (ngSubmit)="onSaveClick()"
+>
+  <div
+    fxLayout="row"
+    class="m-b-15"
+    *ngFor="let control of jsonFormControls"
+  >
+    <mat-form-field fxFlex="100">
+      <mat-label>
+        {{'taskManagement.taskDetail.formFields.' +  control.name| translate}}
+      </mat-label>
+      <input
+        matInput
+        [formControlName]="control.name"
+        [type]="control.type"
+      >
+    </mat-form-field>
+  </div>
+  <div
+    fxLayout="row"
+    fxLayoutAlign="end center"
+    fxLayoutGap="10px"
+  >
+    <button
+      mat-flat-button
+      color="warn"
+      (click)="onCancelClick()"
+      type="button"
+    >
+      {{'buttons.cancelButton' | translate}}
+    </button>
+    <button
+      [disabled]="!formGroup.valid"
+      mat-flat-button
+      color="primary"
+      type="submit"
+    >
+      {{'buttons.chooseButton' | translate}}
+    </button>
+  </div>
+</form>

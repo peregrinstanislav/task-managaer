@@ -1,0 +1,59 @@
+<div
+  fxLayout="row"
+  fxLayoutAlign="start center"
+>
+  <h2>
+    <strong>
+      {{'taskManagement.taskChooser.title' | translate}}
+    </strong>
+  </h2>
+</div>
+<form
+  [formGroup]="form"
+  (ngSubmit)="onChooseClick()"
+>
+  <div
+    fxLayout="row"
+    class="m-b-15"
+  >
+    <mat-form-field fxFlex="100">
+      <mat-label>
+        {{'taskManagement.taskChooser.placeholder' | translate}}
+      </mat-label>
+      <mat-select
+        formControlName="taskType"
+        (selectionChange)="selectionChanged(confirmButton)"
+      >
+        <mat-option
+          *ngFor="let type of taskTypes"
+          [value]="type"
+        >
+          {{'taskManagement.taskTypes.' + type | translate}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div
+    fxLayout="row"
+    fxLayoutAlign="end center"
+    fxLayoutGap="10px"
+  >
+    <button
+      mat-flat-button
+      color="warn"
+      (click)="onCancelClick()"
+      type="button"
+    >
+      {{'buttons.cancelButton' | translate}}
+    </button>
+    <button
+      #confirmButton
+      [disabled]="!form.valid"
+      mat-flat-button
+      color="primary"
+      (click)="onChooseClick()"
+    >
+      {{'buttons.chooseButton' | translate}}
+    </button>
+  </div>
+</form>

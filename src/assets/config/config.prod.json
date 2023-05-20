@@ -1,0 +1,8 @@
+{
+    "env": {
+        "production": true,
+        "name": "PROD"
+    },
+    "defaultLanguage": "##defaultLanguage##",
+    "apiUrl": "##apiUrl##"
+}

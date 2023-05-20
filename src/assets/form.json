@@ -1,0 +1,56 @@
+{
+    "forms": [
+        {
+            "key": "vacuum-clean",
+            "values": [
+                "name",
+                "who",
+                "room"
+            ]
+        },
+        {
+            "key": "wash-dishes",
+            "values": [
+                "name",
+                "durationInHours"
+            ]
+        }
+    ],
+    "formControls": [
+        {
+            "name": "type",
+            "type": "selectbox",
+            "validators": {
+                "required": true
+            }
+        },
+        {
+            "name": "name",
+            "type": "text",
+            "validators": {
+                "required": true
+            }
+        },
+        {
+            "name": "durationInHours",
+            "type": "number",
+            "validators": {
+                "required": true
+            }
+        },
+        {
+            "name": "who",
+            "type": "text",
+            "validators": {
+                "required": true
+            }
+        },
+        {
+            "name": "room",
+            "type": "text",
+            "validators": {
+                "required": true
+            }
+        }
+    ]
+}

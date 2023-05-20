@@ -1,0 +1,92 @@
+<div class="p-15">
+  <dx-data-grid
+    keyExpr="_id"
+    #dxTableDetail
+    [dataSource]="this.worker.fetchedData ?? []"
+    [showBorders]="true"
+    [remoteOperations]="false"
+    [allowColumnReordering]="true"
+    [allowColumnResizing]="true"
+    [columnAutoWidth]="true"
+    [showBorders]="true"
+    [wordWrapEnabled]="true"
+    [focusedRowEnabled]="true"
+    [autoNavigateToFocusedRow]="true"
+    [hoverStateEnabled]="true"
+    [repaintChangesOnly]="true"
+    [(focusedRowKey)]="focusedRowKey"
+    (onRowClick)="onRowClick($event)"
+    (onFocusedRowChanging)="onFocusedRowChanging($event)"
+    (onCellHoverChanged)="hoveredRowKey=$event.key"
+    (mouseleave)="hoveredRowKey=0"
+    (onToolbarPreparing)="onToolbarPreparing($event)"
+    noDataText="{{'devextreme.emptyMessage' | translate}}"
+    height="600px"
+  >
+    <dxo-search-panel
+      [visible]="true"
+      [highlightSearchText]="false"
+      placeholder="{{'devextreme.search' | translate}}"
+    ></dxo-search-panel>
+    <dxo-editing
+      [allowAdding]="true"
+      [allowDeleting]="true"
+      [allowUpdating]="true"
+    >
+      <dxo-texts confirmDeleteMessage="{{'devextreme.deleteMessage' | translate }}"></dxo-texts>
+    </dxo-editing>
+    <dxo-load-panel [enabled]="false"></dxo-load-panel>
+    <dxo-sorting
+      mode="single"
+      ascendingText="{{'devextreme.sortAscending' | translate}}"
+      descendingText="{{'devextreme.sortDescending' | translate}}"
+      clearText="{{'devextreme.sortClear' | translate}}"
+      showSortIndexes="false"
+    ></dxo-sorting>
+    <dxo-scrolling [useNative]="true"></dxo-scrolling>
+    <dxo-pager
+      [visible]="true"
+      [allowedPageSizes]="[5, 10, 15, 25, 50, 100]"
+      displayMode="full"
+      [showPageSizeSelector]="true"
+      [showInfo]="false"
+      [showNavigationButtons]="true"
+    ></dxo-pager>
+    <dxo-paging
+      [pageSize]="15"
+      [pageIndex]="0"
+    ></dxo-paging>
+
+    <dxi-column
+      dataField="name"
+      [calculateFilterExpression]="calculateFilterExprName"
+      [calculateSortValue]="calculateSortValueName"
+      caption="{{'taskManagement.dataGrid.name' | translate}}"
+    ></dxi-column>
+    <dxi-column
+      [calculateFilterExpression]="calculateFilterExprType"
+      [calculateSortValue]="calculateSortValueType"
+      dataField="type"
+      caption="{{'taskManagement.dataGrid.type' | translate}}"
+      cellTemplate="typeCell"
+    ></dxi-column>
+    <dxi-column
+      [allowReordering]="false"
+      type="buttons"
+    >
+      <dxi-button
+        name="edit"
+        [onClick]="onEditClick"
+        icon="edit"
+      ></dxi-button>
+      <dxi-button
+      [onClick]="onDeleteClick"
+        name="delete"
+        icon="trash"
+      ></dxi-button>
+    </dxi-column>
+    <div *dxTemplate="let data of 'typeCell'">
+      {{'taskManagement.taskTypes.' + data.data.type | translate}}
+    </div>
+  </dx-data-grid>
+</div>

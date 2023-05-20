@@ -1,0 +1,41 @@
+<mat-toolbar
+  fxLayout="row"
+  fxLayoutAlign="space-between center"
+  color="primary"
+>
+  <!-- app name -->
+  <h3>{{'appName' | translate}}</h3>
+  <!-- right side lang change -->
+  <button
+    [matMenuTriggerFor]="flags"
+    mat-icon-button
+    class="m-r-10"
+    id="open-languages-button"
+    style="height: 50px;"
+  >
+    <mat-icon fxHide.lt-sm>language</mat-icon>
+    <span
+      fxHide.lt-sm
+      class="m-t-5"
+    >
+      &nbsp;{{selectedLanguageCode?.toUpperCase()}}
+    </span>
+    <span
+      fxHide.gt-xs
+      style="font-weight: 500;"
+    >
+      &nbsp;{{selectedLanguageCode?.toUpperCase()}}
+    </span>
+  </button>
+  <mat-menu #flags="matMenu">
+    <button
+      mat-menu-item
+      *ngFor="let lang of languages"
+      (click)="changeLanguage(lang)"
+      id="{{'language-'+ lang.language}}"
+    >
+      <span>{{lang.language}}</span>
+    </button>
+  </mat-menu>
+
+</mat-toolbar>
