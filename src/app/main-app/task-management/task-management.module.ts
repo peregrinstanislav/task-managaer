@@ -20,6 +20,7 @@ import { MatInputModule } from "@angular/material/input";
 import { DynamicFormControlModule } from "src/app/shared/components/form-controls/dynamic-form-control/dynamic-form-control.module";
 import { MatDividerModule } from "@angular/material/divider";
 import { DialogButtonsModule } from "src/app/shared/components/dialog-buttons/dialog-buttons.module";
+import { DataGridModule } from "src/app/shared/components/data-grid/data-grid.module";
 
 @NgModule({
   declarations: [TaskListComponent, TaskDetailComponent, TaskChoserComponent],
@@ -40,6 +41,7 @@ import { DialogButtonsModule } from "src/app/shared/components/dialog-buttons/di
     MatDividerModule,
     DynamicFormControlModule,
     DialogButtonsModule,
+    DataGridModule,
     RouterModule.forChild(TaskManagementRoutes),
   ],
   exports: [],

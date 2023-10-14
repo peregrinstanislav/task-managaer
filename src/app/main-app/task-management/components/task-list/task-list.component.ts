@@ -1,24 +1,18 @@
 import { Component, OnInit } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
 import { Task } from "../../models/task-management.model";
-import {
-  FocusedRowChangingEvent,
-  RowClickEvent,
-  ToolbarPreparingEvent,
-} from "devextreme/ui/data_grid";
-import {
-  calculateFilterExpression,
-  calculateFilterExpressionOfTranslatedValue,
-  calculateSortValue,
-} from "src/app/utils/misc.util";
-import { TasksService } from "../../services/tasks.service";
-import { cloneDeep } from "lodash";
+import { Column } from "devextreme/ui/data_grid";
 import { MatDialog } from "@angular/material/dialog";
 import { TaskChoserComponent } from "../task-choser/task-choser.component";
 import { ConfirmService } from "src/app/shared/services/confirm-dialog.service";
 import { Observable, take } from "rxjs";
 import { TaskDetailComponent } from "../task-detail/task-detail.component";
 import { TaskManagementStore } from "../../store/task-management.store";
+import {
+  calculateFilterExpression,
+  calculateFilterExpressionOfTranslatedValue,
+  calculateSortValue,
+} from "src/app/utils/misc.util";
 
 @Component({
   selector: "app-task-list",
@@ -28,12 +22,39 @@ import { TaskManagementStore } from "../../store/task-management.store";
 })
 export class TaskListComponent implements OnInit {
   tasks$: Observable<Task[]>;
-  rowDeselectionRaised = false;
+  taskColumns: Column[] = [
+    {
+      dataField: "name",
+      caption: "taskManagement.dataGrid.name",
+      calculateSortValue: (data: any): any => calculateSortValue(data, "name"),
+      calculateFilterExpression: (
+        filterValue: any,
+        selectedFilterOperation: any
+      ): any =>
+        calculateFilterExpression(filterValue, selectedFilterOperation, "name"),
+    },
+    {
+      dataField: "type",
+      caption: "taskManagement.dataGrid.type",
+      cellTemplate: "typeCell",
+      calculateSortValue: (data: any): any => calculateSortValue(data, "type"),
+      calculateFilterExpression: (
+        filterValue: any,
+        selectedFilterOperation: any
+      ): any =>
+        calculateFilterExpressionOfTranslatedValue(
+          this.translate,
+          "taskManagement.taskTypes.",
+          filterValue,
+          selectedFilterOperation,
+          "type"
+        ),
+    },
+  ];
 
   constructor(
     private translate: TranslateService,
-    private tasksService: TasksService,
-    public dialog: MatDialog,
+    private dialog: MatDialog,
     private confirmService: ConfirmService,
     private taskManagementStore: TaskManagementStore
   ) {
@@ -44,68 +65,9 @@ export class TaskListComponent implements OnInit {
     this.taskManagementStore.fetch();
   }
 
-  onFocusedRowChanging(event: FocusedRowChangingEvent): void {
-    if (event.newRowIndex === event.prevRowIndex) {
-      this.rowDeselectionRaised = true;
-    }
+  onRefreshClick(): void {
+    this.taskManagementStore.fetch();
   }
-
-  onRowClick(event: RowClickEvent): void {
-    if (this.rowDeselectionRaised) {
-      event.component.instance().option("focusedRowIndex", -1);
-    }
-    this.rowDeselectionRaised = false;
-  }
-
-  onToolbarPreparing(event: ToolbarPreparingEvent): void {
-    if (event.toolbarOptions.items) {
-      event.toolbarOptions.items[0].options.onClick = (): void => {
-        this.onAddNewTaskClick();
-      };
-      // add refresh button into toolbar
-      const refresh = cloneDeep(event.toolbarOptions.items[0]);
-      refresh.name = "refreshButton";
-      refresh.options.hint = "Refresh";
-      refresh.options.icon = "refresh";
-      refresh.options.text = "Refresh";
-      refresh.options.onClick = (): void => {
-        this.taskManagementStore.fetch();
-      };
-      event.toolbarOptions.items.splice(1, 0, refresh);
-    }
-  }
-
-  calculateFilterExprName = (
-    filterValue: any,
-    selectedFilterOperation: any
-  ): any => {
-    return calculateFilterExpression(
-      filterValue,
-      selectedFilterOperation,
-      "name"
-    );
-  };
-
-  calculateFilterExprType = (
-    filterValue: any,
-    selectedFilterOperation: any
-  ): any => {
-    return calculateFilterExpressionOfTranslatedValue(
-      this.translate,
-      "taskManagement.taskTypes.",
-      filterValue,
-      selectedFilterOperation,
-      "type"
-    );
-  };
-
-  calculateSortValueName = (data: any): any => {
-    return calculateSortValue(data, "name");
-  };
-
-  calculateSortValueType = (data: any): any => {
-    return calculateSortValue(data, "type");
-  };
 
   onAddNewTaskClick(): void {
     this.dialog
@@ -122,9 +84,29 @@ export class TaskListComponent implements OnInit {
       });
   }
 
-  onEditClick = (event: any): void => {
-    this.openTaskDetail({ update: true, data: event.row.data });
-  };
+  onEditClick(event: any): void {
+    this.openTaskDetail({ update: true, data: event.data });
+  }
+
+  onDeleteClick(event: any): void {
+    this.confirmService
+      .openConfirmDialog({
+        title: this.translate.instant("taskManagement.dataGrid.deleteTitle"),
+        message: this.translate.instant(
+          "taskManagement.dataGrid.deleteMessage"
+        ),
+        btnYesTitle: this.translate.instant("buttons.yesButton"),
+        btnNoTitle: this.translate.instant("buttons.noButton"),
+        width: "300px",
+      })
+      .afterClosed()
+      .pipe(take(1))
+      .subscribe((result: boolean) => {
+        if (result) {
+          this.taskManagementStore.delete(event);
+        }
+      });
+  }
 
   private openTaskDetail(payload: any): void {
     this.dialog
@@ -146,25 +128,4 @@ export class TaskListComponent implements OnInit {
         }
       });
   }
-
-  onDeleteClick = (event: any): void => {
-    this.confirmService
-      .openConfirmDialog({
-        title: this.translate.instant("taskManagement.dataGrid.deleteTitle"),
-        message: this.translate.instant(
-          "taskManagement.dataGrid.deleteMessage"
-        ),
-        btnYesTitle: this.translate.instant("buttons.yesButton"),
-        btnNoTitle: this.translate.instant("buttons.noButton"),
-        width: "300px",
-      })
-      .afterClosed()
-      .pipe(take(1))
-      .subscribe((result: boolean) => {
-        if (result) {
-          const id = event.row.data.id;
-          this.taskManagementStore.delete(id);
-        }
-      });
-  };
 }
