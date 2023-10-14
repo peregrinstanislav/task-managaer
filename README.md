@@ -1,7 +1,7 @@
 # task-manager
 
 Application for task management of dynamically changed task types.
-If there will be request for new task type, application can react to this just by editing form.json without any further programming.
+We assume that task will always have its "id", "name" and task "type" property, but values inside "fields" property can be dynamically changed accroding to users requirements. If there will be request for new task type, application can react to this just by editing form.json without any further programming.
 Technololgy used in this app:
 
 - UI
@@ -17,6 +17,7 @@ Technololgy used in this app:
   - ngrx component store
 
 - Other
+
   - ngx-translate
   - lodash
 
