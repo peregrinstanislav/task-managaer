@@ -13,7 +13,6 @@ import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
 @Component({
   selector: "app-data-grid",
   templateUrl: "./data-grid.component.html",
-  styleUrls: ["./data-grid.component.scss"],
 })
 export class DataGridComponent implements OnInit {
   columnCaptions: (string | undefined)[] = [];
